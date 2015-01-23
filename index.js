@@ -44,6 +44,10 @@ module.exports = function hybridifyAll(source, dest) {
     throw new Error('hybridify-all: should have at least 1 arguments');
   }
 
+  if (typeOf(source) !== 'function' && typeOf(source) !== 'object') {
+    throw new TypeError('hybridify-all: expect `source` be object|function');
+  }
+
   dest = dest || {};
 
   if (typeof source === 'function') {
@@ -57,3 +61,22 @@ module.exports = function hybridifyAll(source, dest) {
     return dest;
   }, dest) : dest;
 };
+
+/**
+ * Get correct type of value
+ *
+ * @param  {*} `val`
+ * @return {String}
+ * @api private
+ */
+function typeOf(val) {
+  if (typeof val !== 'object') {
+    return typeof val;
+  }
+
+  if (Array.isArray(val)) {
+    return 'array';
+  }
+
+  return {}.toString(val).slice(8, -1).toLowerCase();
+}

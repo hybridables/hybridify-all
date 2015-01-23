@@ -11,8 +11,21 @@ var assert = require('assert');
 var hybridifyAll = require('./index');
 
 describe('hybridify-all:', function() {
-  it('should throw if no arguments', function(done) {
+  it('should throw Error if no arguments', function(done) {
     assert.throws(hybridifyAll, Error);
+    done();
+  });
+
+  it('TypeError when first argument isnt Object or Function', function(done) {
+    function fixture() {
+      hybridifyAll('some string')
+    }
+    assert.throws(fixture, TypeError);
+
+    function fixture() {
+      hybridifyAll(['args', 123])
+    }
+    assert.throws(fixture, TypeError);
     done();
   });
 
