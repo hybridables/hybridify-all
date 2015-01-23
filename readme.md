@@ -8,16 +8,39 @@ npm install hybridify-all
 npm test
 ```
 
+## Related
+- [hybridify][hybridify]
 
-## Usage
+
+## API
 > For more use-cases see the [tests](./test.js)
+
+### [.hybridifyAll](./index.js#L41)
+> Hybridifies all the selected functions in an object.
+
+- `<source>` **{Object|Function}** the source object for the async functions  
+- `[dest]` **{Object|Function}** the destination to set all the hybridified methods
+- `return` **{Object|Function}**
+
+**Example:**
 
 ```js
 var hybridifyAll = require('hybridify-all');
+var fs = require('fs');
+
+fs = hybridifyAll(fs);
+fs.readFile(__filename, 'utf8', function(err, res) {
+  //=> err, res
+})
+.then(function(res) {
+  //=> res
+  return fs.stat(__filename);
+})
+.then(function(stat) {
+  assert.strictEqual(stat.size, fs.statSync(__filename).size);
+  done();
+});
 ```
-
-
-## API / CLI
 
 
 ## Author
@@ -60,3 +83,5 @@ Released under the [`MIT`][license-url] license.
 ***
 
 _Powered and automated by [kdf](https://github.com/tunnckoCore), January 23, 2015_
+
+[hybridify]: https://github.com/tunnckoCore/hybridify

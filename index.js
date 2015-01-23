@@ -11,10 +11,32 @@ var reduce = require('object.reduce');
 var hybridify = require('hybridify');
 
 /**
- * Hybridifies all the selected functions in an object.
+ * > Hybridifies all the selected functions in an object.
  *
- * @param {Object} `<source>` the source object for the async functions
- * @return {Object}
+ * **Example:**
+ *
+ * ```js
+ * var hybridifyAll = require('hybridify-all');
+ * var fs = require('fs');
+ *
+ * fs = hybridifyAll(fs);
+ * fs.readFile(__filename, 'utf8', function(err, res) {
+ *   //=> err, res
+ * })
+ * .then(function(res) {
+ *   //=> res
+ *   return fs.stat(__filename);
+ * })
+ * .then(function(stat) {
+ *   assert.strictEqual(stat.size, fs.statSync(__filename).size);
+ *   done();
+ * });
+ * ```
+ *
+ * @name hybridifyAll
+ * @param {Object|Function} `<source>` the source object for the async functions
+ * @param {Object|Function} `[dest]` the destination to set all the hybridified methods
+ * @return {Object|Function}
  * @api public
  */
 module.exports = function hybridifyAll(source, dest) {

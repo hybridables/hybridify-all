@@ -1,7 +1,7 @@
 /**
  * hybridify-all <https://github.com/tunnckoCore/hybridify-all>
  *
- * Copyright (c) 2015 Charlike Mike Reagent, contributors.
+ * Copyright (c) 2014-2015 Charlike Mike Reagent, contributors.
  * Released under the MIT license.
  */
 
@@ -9,8 +9,6 @@
 
 var assert = require('assert');
 var hybridifyAll = require('./index');
-
-// console.log(hybridifyAll(require('got')));
 
 describe('hybridify-all:', function() {
   it('hybridifyAll(require(\'fs\').readFile)', function(done) {
@@ -25,7 +23,7 @@ describe('hybridify-all:', function() {
     })
     .then(function(res) {
       assert(~res.indexOf('kasjdflasj'));
-      return stat(__filename)
+      return stat(__filename);
     })
     .then(function(stat) {
       assert.strictEqual(stat.size, fs.statSync(__filename).size);
@@ -37,7 +35,7 @@ describe('hybridify-all:', function() {
     var fsfake = {customAsyncFn: function() {}};
     var fs = require('fs');
 
-    fsfake = hybridifyAll(fs, fsfake)
+    fsfake = hybridifyAll(fs, fsfake);
 
     fsfake.readFile(__filename, 'utf8', function(err, res) {
       assert(!err)
@@ -45,7 +43,7 @@ describe('hybridify-all:', function() {
     })
     .then(function(res) {
       assert(~res.indexOf('kasjdflasj'));
-      return fsfake.stat(__filename)
+      return fsfake.stat(__filename);
     })
     .then(function(stat) {
       assert.strictEqual(typeof fsfake.customAsyncFn, 'function')
@@ -59,7 +57,7 @@ describe('hybridify-all:', function() {
     var gotfake = {customAsyncFn: function() {}};
     var got = require('got');
 
-    gotfake = hybridifyAll(got, gotfake)
+    gotfake = hybridifyAll(got, gotfake);
 
     gotfake.get('https://github.com')
     .then(function(res) {
