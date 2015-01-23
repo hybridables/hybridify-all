@@ -16,12 +16,15 @@ describe('hybridify-all:', function() {
     done();
   });
 
-  it('TypeError when first argument isnt Object or Function', function(done) {
+  it('TypeError when first argument isnt Object', function(done) {
     function fixture() {
       hybridifyAll('some string')
     }
     assert.throws(fixture, TypeError);
+    done();
+  });
 
+  it('TypeError when first argument isnt Function', function(done) {
     function fixture() {
       hybridifyAll(['args', 123])
     }
