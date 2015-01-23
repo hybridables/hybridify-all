@@ -11,6 +11,11 @@ var assert = require('assert');
 var hybridifyAll = require('./index');
 
 describe('hybridify-all:', function() {
+  it('should throw if no arguments', function(done) {
+    assert.throws(hybridifyAll, Error);
+    done();
+  });
+
   it('hybridifyAll(require(\'fs\').readFile)', function(done) {
     var fs = require('fs');
 
