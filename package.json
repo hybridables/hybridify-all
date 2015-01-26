@@ -1,6 +1,6 @@
 {
   "name": "hybridify-all",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hybridifies all the selected functions in an object.",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",
@@ -23,7 +23,7 @@
     "url": "https://github.com/hybridables/hybridify-all/blob/master/license.md"
   },
   "dependencies": {
-    "hybridify": "^1.0.0",
+    "hybridify": "^1.0.x",
     "object.reduce": "^0.1.3"
   },
   "devDependencies": {
