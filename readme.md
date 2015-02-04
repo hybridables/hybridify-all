@@ -3,8 +3,8 @@
 > Hybridifies all the selected functions in an object.
 
 ## Install
-```bash
-npm install hybridify-all
+```
+npm i --save hybridify-all
 npm test
 ```
 
@@ -18,7 +18,7 @@ npm test
 ## API
 > For more use-cases see the [tests](./test.js)
 
-### [.hybridifyAll](./index.js#L41)
+### [hybridifyAll](./index.js#L41)
 > Hybridifies all the selected functions in an object.
 
 - `<source>` **{Object|Function}** the source object for the async functions  
@@ -85,7 +85,7 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [kdf](https://github.com/tunnckoCore), January 26, 2015_
+_Powered and automated by [kdf](https://github.com/tunnckoCore), February 4, 2015_
 
 [hybridify]: https://github.com/hybridables/hybridify
 [handle-callback]: https://github.com/hybridables/handle-callback
