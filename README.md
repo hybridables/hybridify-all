@@ -42,6 +42,14 @@ fs.readFile(__filename, 'utf8', function(err, res) {
 ```
 
 
+## Related
+- [exec-cmd](https://github.com/hybridables/exec-cmd): Flexible and cross-platform executing commands. Hybrid. Async and Promise API.
+- [hybridify](https://github.com/hybridables/hybridify#readme): Building hybrid APIs. You can use both callback and promise in same time.  Like `asyncFn(name, cb).then().catch()`
+- [handle-callback](https://github.com/hybridables/handle-callback): Initial step for creating hybrid APIs, used by `hybridify`. Handle callback in promise - give promise and callback return promise.
+- [handle-arguments](https://github.com/hybridables/handle-arguments#readme): Handles given Arguments object - return separatly last argument (commonly callback) and other arguments as Array. Useful in node-style callback flow.
+- [then-got](https://github.com/hybridables/then-got): Simplified and promisified HTTP/HTTPS requests (`sindresorhus/got`). **Hybrid, Async and Promise API.**
+
+
 ## Contributing
 
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/hybridables/hybridify-all/issues/new).  
