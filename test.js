@@ -1,89 +1,85 @@
-/**
- * hybridify-all <https://github.com/tunnckoCore/hybridify-all>
+/*!
+ * hybridify-all <https://github.com/hybridables/hybridify-all>
  *
- * Copyright (c) 2014-2015 Charlike Mike Reagent, contributors.
+ * Copyright (c) 2015 Charlike Mike Reagent, contributors.
  * Released under the MIT license.
  */
 
-'use strict';
+/* jshint asi:true */
 
-var assert = require('assert');
-var hybridifyAll = require('./index');
+'use strict'
 
-describe('hybridify-all:', function() {
-  it('should throw Error if no arguments', function(done) {
-    assert.throws(hybridifyAll, Error);
-    done();
-  });
+var test = require('assertit')
+var hybridifyAll = require('./index')
 
-  it('TypeError when first argument isnt Object', function(done) {
-    function fixture() {
+test('hybridify-all:', function () {
+  test('should throw Error if no arguments', function (done) {
+    function fixture () {
+      hybridifyAll()
+    }
+    test.throws(fixture, Error)
+    done()
+  })
+  test('TypeError when first argument isnt Object', function (done) {
+    function fixture () {
       hybridifyAll('some string')
     }
-    assert.throws(fixture, TypeError);
-    done();
-  });
-
-  it('TypeError when first argument isnt Function', function(done) {
-    function fixture() {
+    test.throws(fixture, TypeError)
+    done()
+  })
+  test('TypeError when first argument isnt Function', function (done) {
+    function fixture () {
       hybridifyAll(['args', 123])
     }
-    assert.throws(fixture, TypeError);
-    done();
-  });
+    test.throws(fixture, TypeError)
+    done()
+  })
+  test('hybridifyAll(require("fs").readFile)', function (done) {
+    var fs = require('fs')
+    var readFile = hybridifyAll(fs.readFile)
+    var stat = hybridifyAll(fs.stat)
 
-  it('hybridifyAll(require(\'fs\').readFile)', function(done) {
-    var fs = require('fs');
-
-    var readFile = hybridifyAll(fs.readFile);
-    var stat = hybridifyAll(fs.stat);
-
-    readFile(__filename, 'utf8', function(err, res) {
-      assert(!err)
-      assert(~res.indexOf('kasjdflasj'));
+    readFile(__filename, 'utf8', function (err, res) {
+      test.ifError(err)
+      test.ok(~res.indexOf('kasjdflasj'))
     })
-    .then(function(res) {
-      assert(~res.indexOf('kasjdflasj'));
-      return stat(__filename);
+    .then(function (res) {
+      test.ok(~res.indexOf('kasjdflasj'))
+      return stat(__filename)
     })
-    .then(function(stat) {
-      assert.strictEqual(stat.size, fs.statSync(__filename).size);
-      done();
+    .then(function (stat) {
+      test.equal(stat.size, fs.statSync(__filename).size)
+      done()
     })
-  });
+  })
+  test('hybridifyAll(require("fs"), destination)', function (done) {
+    var fsfake = {customAsyncFn: function () {}}
+    var fs = require('fs')
 
-  it('hybridifyAll(require(\'fs\'), destination)', function(done) {
-    var fsfake = {customAsyncFn: function() {}};
-    var fs = require('fs');
-
-    fsfake = hybridifyAll(fs, fsfake);
-
-    fsfake.readFile(__filename, 'utf8', function(err, res) {
-      assert(!err)
-      assert(~res.indexOf('kasjdflasj'));
+    fsfake = hybridifyAll(fs, fsfake)
+    fsfake.readFile(__filename, 'utf8', function (err, res) {
+      test.ifError(err)
+      test.ok(~res.indexOf('kasjdflasj'))
     })
-    .then(function(res) {
-      assert(~res.indexOf('kasjdflasj'));
-      return fsfake.stat(__filename);
+    .then(function (res) {
+      test.ok(~res.indexOf('kasjdflasj'))
+      return fsfake.stat(__filename)
     })
-    .then(function(stat) {
-      assert.strictEqual(typeof fsfake.customAsyncFn, 'function')
-      assert.strictEqual(stat.size, fs.statSync(__filename).size);
-      done();
+    .then(function (stat) {
+      test.equal(typeof fsfake.customAsyncFn, 'function')
+      test.equal(stat.size, fs.statSync(__filename).size)
+      done()
     })
-  });
+  })
+  test('hybridifyAll(require("got"))', function (done) {
+    var gotfake = {customAsyncFn: function () {}}
+    var got = require('got')
 
-  it('hybridifyAll(require(\'got\'))', function(done) {
-    this.timeout(10000);
-    var gotfake = {customAsyncFn: function() {}};
-    var got = require('got');
-
-    gotfake = hybridifyAll(got, gotfake);
-
+    gotfake = hybridifyAll(got, gotfake)
     gotfake.get('https://github.com')
-    .then(function(res) {
-      assert(res);
-      done();
-    });
-  });
-});
+    .then(function (res) {
+      test.ok(res)
+      done()
+    })
+  })
+})
