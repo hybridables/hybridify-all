@@ -1,6 +1,10 @@
 
 
-## 1.0.3 - 2015-02-04
+## 1.0.4 - 2015-02-17
+- Release v1.0.4 / npm@v1.0.4
+- fix contributing section typo 
+
+## 1.0.3 - 2015-02-16
 - Release v1.0.3 / npm@v1.0.3
 - update changelog
 - add related section

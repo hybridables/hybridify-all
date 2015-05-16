@@ -1,6 +1,6 @@
 {
   "name": "hybridify-all",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Hybridifies all the selected functions in an object.",
   "scripts": {
     "test": "standard && node test.js"
@@ -48,7 +48,7 @@
     "url": "https://github.com/hybridables/hybridify-all/blob/master/LICENSE.md"
   },
   "dependencies": {
-    "hybridify": "~1.0.7",
+    "hybridify": "~1.0.9",
     "object.reduce": "^0.1.3"
   },
   "devDependencies": {
